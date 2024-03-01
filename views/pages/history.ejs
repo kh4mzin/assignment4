@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superheroes</title>
+    <%- include('../components/head.ejs') %>
+    <style>
+        * {
+            font-family: "Arial", sans-serif;
+        }
+        body{
+            background-color: #f4f4f4;
+        }
+        .btn-primary {
+            background-color: #518cca;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn-danger{
+            background-color: lightcoral;
+        }
+
+        .log-entry {
+            background: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+        .btn-primary, .btn-danger {
+
+
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: lightgreen;
+        }
+
+        .btn-danger:hover {
+            background-color: #f44336;
+        }
+        .container {
+
+        }
+        .fs-1{
+            padding-left: 600px;
+
+        }
+    </style>
+</head>
+<body>
+    <%- include('../components/navbar.ejs') %>
+
+    <div class="container">
+        <div class="fs-1 mb-3">History</div>
+        <br>
+        <% if (logs.length > 0) { %>
+            <% logs.forEach(function(log) { %>
+                <div class="log-entry">
+                    <p><strong>Type of the request</strong> <%= log.request_type %></p>
+                    <p><strong>Username:</strong> <%= log.request_data %></p>
+                    <p><strong>Timestamp:</strong> <%= new Date(log.timestamp).toLocaleString() %></p>
+                    <!-- Button to view log details -->
+                    <div class="d-flex">
+                        <a href="/history/<%= log._id %>" class="btn btn-primary">JSON response</a>&nbsp;&nbsp;
+                        <a href="/history/<%= log._id %>/delete" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No logs found.</p>
+        <% } %>
+    </div>
+    
+
+    <% if (error) { %>
+        <script>
+            Swal.fire({
+                title: "An error occurred!",
+                text: "<%= error %>",
+                icon: "error",
+                confirmButtonText: "OK",
+            });
+        </script>
+    <% } %>
+
+</body>
+
+</html>

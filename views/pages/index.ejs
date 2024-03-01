@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superheroes</title>
+    <%- include('../components/head.ejs') %>
+
+    <style>
+        body {
+            background-color: white;
+            font-family: 'Roboto', sans-serif;
+            background-image: url("https://c4.wallpaperflare.com/wallpaper/947/702/550/daredevil-marvel-comics-wallpaper-preview.jpg");
+            background-size: cover;
+        }
+        .btn-primary{
+            background-color: #518cca;
+        }
+        h1 {
+            margin-bottom: 30px;
+            font-size: 36px;
+
+        }
+        .containerblock {
+
+            margin-top: 20px;
+            padding: 30px;
+        }
+        .col-md-6 {
+
+            background: rgba(81,140,202, 0.70);
+        }
+        .text-center{
+            margin-top: 10px;
+        }
+        .container p {
+            color: #666666;
+            font-size: 18px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<%- include('../components/navbar.ejs') %>
+
+
+<div class="containerblock">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">Welcome to Amir's Project</h1>
+            <h3 class="text-center mb-4">Navigate using the navbar above</h3>
+            <p class="text-center">You can check the Superheroes search,News</p>
+        </div>
+    </div>
+</div>
+
+
+<% if (error) { %>
+    <script>
+        Swal.fire({
+            title: "An error occured!",
+            text: "<%= error %>",
+            icon: "error"
+        });
+    </script>
+<% } %>
+
+</body>
+</html>

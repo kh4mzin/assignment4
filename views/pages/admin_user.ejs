@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details - Admin Panel</title>
+    <%- include('../components/head.ejs') %>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Arial", sans-serif;
+        }
+
+        /* Стили для улетающего воздушного шара */
+        .balloon {
+            width: 50px;
+            height: 80px;
+            background-color: #6cae3d;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: balloonAnimation 1s linear infinite alternate;
+        }
+
+        /* Анимация для улетающего воздушного шара */
+        @keyframes balloonAnimation {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -150%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<%- include('../components/navbar.ejs') %>
+
+<div class="container mt-4">
+    <a class="text-decoration-none text-dark" href="/admin"><i class="fa-solid fa-arrow-up"></i> back to admin panel</a>
+
+    <br>
+    <br>
+
+    <h2>User Details: <%= user.username %></h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <h5 class="card-title">Profile Information</h5>
+            <p class="card-text"><strong>Username:</strong> <%= user.username %></p>
+            <p class="card-text"><strong>Email:</strong> <%= user.email %></p>
+            <p class="card-text"><strong>Admin:</strong> <%= user.is_admin ? 'Yes' : 'No' %></p>
+        </div>
+    </div>
+
+    <h3>Activity Logs</h3>
+    <% if (logs && logs.length > 0) { %>
+        <div class="list-group">
+            <% logs.forEach(function(log) { %>
+                <a class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Log ID: <%= log._id %></h5>
+                        <small><%= new Date(log.timestamp).toLocaleString() %></small>
+                    </div>
+                    <p class="mb-1">Request Type: <%= log.request_type %></p>
+                    <p class="mb-1">Status Code: <%= log.status_code %></p>
+                </a>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <p>No logs found.</p>
+    <% } %>
+</div>
+<div class="balloon"></div>
+<% if (error) { %>
+    <script>
+        Swal.fire({
+            title: "An error occurred!",
+            text: "<%= error %>",
+            icon: "error",
+            confirmButtonText: "OK",
+        });
+    </script>
+<% } %>
+<%- include('../components/footer.ejs') %>
+<div id="google_translate_element"></div>
+<script>function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+</script>
+</body>
+</html>

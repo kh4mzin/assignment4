@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <%- include('../components/head.ejs') %>
+    <style>
+
+        * {
+            font-family: "Arial", sans-serif;
+        }
+        .fs-1 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #518cca;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+
+        .list-group-item {
+            background-color: #f8f9fa;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 15px;
+        }
+
+        .list-group-item:hover {
+            background-color: #e2e6ea;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            background-color: lightblue;
+            color: white;
+            padding: 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+
+
+        .modal-footer {
+            background-color: #f2f2f2;
+            padding: 10px;
+
+        }
+
+        .btn-close {
+            color: white;
+        }
+
+        .btn-close:hover {
+            color: #ccc;
+        }
+
+
+    </style>
+</head>
+<body>
+<%- include('../components/navbar.ejs') %>
+
+<div class="container">
+    <h1>All Superheroes</h1>
+    <div class="row">
+        <% superheroes.forEach(superhero => { %>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div id="carousel<%= superhero._id %>" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <% superhero.images.forEach((image, index) => { %>
+                                <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                                    <img src="<%= image %>" class="d-block w-100" alt="...">
+                                </div>
+                            <% }) %>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel<%= superhero._id %>" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel<%= superhero._id %>" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= superhero.name %></h5>
+                        <p class="card-text"><%= superhero.description %></p>
+                        <!-- Add more superhero details as needed -->
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include('../components/footer.ejs') %>
+<div id="google_translate_element"></div>
+<script>function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+</script>
+</body>
+</html>

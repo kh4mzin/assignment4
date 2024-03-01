@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <style>
+        * {
+            font-family: "Arial", sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f0f0f0;
+        }
+        .btn-primary {
+            background-color: #518cca;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .card h3 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            color: #555;
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #FF8234FF;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #FF8234FF;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-6 col-lg-4 mt-5">
+            <div class="card rounded-3">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Admin Login</h3>
+                    <% if (error) { %>
+                        <div class="alert" role="alert">
+                            <%= error %>
+                        </div>
+                    <% } %>
+                    <form action="/admin-login" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control rounded-3" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control rounded-3" id="password" name="password" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary rounded-3">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="google_translate_element"></div>
+    <script>function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+</body>
+</html>
+

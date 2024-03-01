@@ -1,0 +1,63 @@
+<!-- comics.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comic List</title>
+    <%- include('../components/head.ejs') %>
+    <style>/* comics.css */
+        h1{
+            text-align: center;
+        }
+
+        /* Style for the comic container */
+        .info{
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            background: rgba(80,74,74, 0.5); /* Dark gray with transparency */
+
+            color: #fff;
+        }
+
+        /* Style for the comic title */
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Style for the comic attributes */
+        p {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<%- include('../components/navbar.ejs') %>
+<h1>Comics you might enjoy!</h1>
+<% if (data && data.length > 0) { %>
+    <% data.forEach(comic => { %>
+        <div class="info">
+            <h2>Title: <%= comic.title %></h2>
+            <p>Issue Number: <%= comic.issueNumber %></p>
+            <p>Description: <%= comic.variantDescription %></p>
+            <p>Format: <%= comic.format %></p>
+            <p>Page Count: <%= comic.pageCount %></p>
+            <p>Series: <%= comic.series.name %></p>
+        </div>
+    <% }); %>
+<% } else { %>
+    <p>No comics found.</p>
+<% } %>
+<div id="google_translate_element"></div>
+<script>function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+</script>
+</body>
+</html>

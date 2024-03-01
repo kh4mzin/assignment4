@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Character Info</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <%- include('../components/head.ejs') %>
+    <style>
+        body{
+            font-family: "Arial", sans-serif;
+            font-weight: bold;
+            background-image: url("https://beatmaker.tv/Default/General/Image/121074?type=BeatImageOriginal&ver=1");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #be2826; /* Fallback color if the background image doesn't load */
+            color: #fff;
+        }
+        .btn-primary {
+            background-color: #518cca;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        /* Existing styles... */
+
+        /* Style for the transparent gray box */
+        .info {
+            margin-top: 20px;
+            background: rgba(86, 98, 98, 0.93); /* Dark gray with transparency */
+            border-radius: 10px;
+            padding: 15px;
+            color: #fff;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333; /* Dark text color */
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="text"],
+        input[type="submit"] {
+            width: calc(100% - 22px); /* Adjusted width to account for padding and border */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #ff8234;
+            color: #fff;
+            cursor: pointer;
+        }
+        .character {
+            border-bottom: 1px solid #ffffff;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        h1{
+            text-align: center;
+            color: #005cbf        }
+
+    </style>
+</head>
+<body>
+<%- include('../components/navbar.ejs') %>
+<h1>Marvel Superheroes Search</h1>
+<form action="/superheroes" method="get">
+    <input type="text" name="character" placeholder="Enter superhero name">
+    <button type="submit" style="
+            width: 340px;
+            height: 35px;
+            background-color: lightblue;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s">Find</button>
+</form>
+
+<div class="info">
+    <% if (data && data.length) { %>
+        <% data.forEach(character => { %>
+            <div class="character">
+                <h2><%= character.name %></h2>
+                <p><%= character.description %></p>
+                <% if (character.powers && character.powers.length) { %>
+                    <h3>Powers:</h3>
+                    <ul>
+                        <% character.powers.forEach(power => { %>
+                            <li><%= power %></li>
+                        <% }); %>
+                    </ul>
+                <% } else { %>
+                    <p>No powers listed.</p>
+                <% } %>
+                <!-- Add more details as needed -->
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No characters found.</p>
+    <% } %>
+</div>
+<div id="google_translate_element"></div>
+<script>function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+</script>
+
+</body>
+</html>
